@@ -23,6 +23,7 @@ export default tseslint.config({
     ...reactHooks.configs.recommended.rules,
     "@typescript-eslint/no-empty-object-type": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "unused-imports/no-unused-imports": "warn",
     "unused-imports/no-unused-vars": ["warn", { varsIgnorePattern: "^_", argsIgnorePattern: "^_" }],
     "import/order": [

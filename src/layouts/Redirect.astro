@@ -6,23 +6,16 @@ interface Props {
 }
 
 const { route } = Astro.props
-const locale = Astro.currentLocale ?? "en"
-const redirectUrl = getRelativeLocaleUrl(locale, route)
+const redirectUrl = getRelativeLocaleUrl("en", route)
 ---
 
 <!doctype html>
-<html lang={locale}>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content={`0; url=${redirectUrl}`} />
-    <meta name="robots" content="noindex, follow" />
-    <link rel="canonical" href={redirectUrl} />
-    <title>Redirecting</title>
-    <script is:inline>
-      window.location.href = JSON.stringify(redirectUrl)
-    </script>
-  </head>
-  <body>
-    <a href={redirectUrl}>{redirectUrl}</a>
-  </body>
-</html>
+<head>
+  <title>Redirecting</title>
+  <meta http-equiv="refresh" content={`0; url=${redirectUrl}`} />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href={redirectUrl} />
+</head>
+<body>
+  Redirecting to <a href={redirectUrl}>{redirectUrl}</a>
+</body>

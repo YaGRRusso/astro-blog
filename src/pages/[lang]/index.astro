@@ -3,17 +3,20 @@ import Link from "@/components/Link.astro"
 import Main from "@/components/Main.astro"
 import Layout from "@/layouts/Layout.astro"
 import Root from "@/layouts/Root.astro"
+import { getTranslation } from "@/utils/translation"
 
 export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "pt" } }]
 }
 
 const { lang } = Astro.params
+
+const t = getTranslation(lang as any)
 ---
 
 <Root locale={lang}>
   <Layout>
-    <Link href="/about" class="text-3xl font-medium tracking-wide">Hello Astro!</Link>
+    <Link href="/about" class="text-3xl font-medium tracking-wide">{t("hello")}</Link>
     <Main />
   </Layout>
 </Root>
