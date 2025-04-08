@@ -1,0 +1,15 @@
+{
+  "printWidth": 120,
+  "semi": false,
+  "tailwindStylesheet": "./src/styles/global.css",
+  "tailwindFunctions": ["cn", "cva"],
+  "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ]
+}
