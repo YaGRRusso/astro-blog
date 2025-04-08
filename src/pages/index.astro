@@ -1,9 +1,12 @@
 ---
-import Main from '../components/Main.astro';
-import Layout from '../layouts/Layout.astro';
-
+import Link from "../components/Link.astro";
+import Main from "../components/Main.astro";
+import Layout from "../layouts/Layout.astro";
 ---
+
 <Layout>
-	<h1 class="text-3xl tracking-wide font-medium">Hello Astro!</h1>
-	<Main />
+  <Link href="/about" class="text-3xl tracking-wide font-medium" target="_blank"
+    >Hello Astro!</Link
+  >
+  <Main />
 </Layout>

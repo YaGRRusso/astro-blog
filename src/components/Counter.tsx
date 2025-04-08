@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Minus, Plus } from "@phosphor-icons/react";
 
-export function Counter() {
+export default function Counter() {
   const [count, setCount] = useState(5);
 
   return (
