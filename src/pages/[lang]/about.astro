@@ -1,0 +1,17 @@
+---
+import Link from "@/components/Link.astro"
+import Layout from "@/layouts/Layout.astro"
+import Root from "@/layouts/Root.astro"
+
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "pt" } }]
+}
+
+const { lang } = Astro.params
+---
+
+<Root locale={lang}>
+  <Layout>
+    <Link href="/" class="link link-hover">About</Link>
+  </Layout>
+</Root>
