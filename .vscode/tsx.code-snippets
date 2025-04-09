@@ -1,0 +1,29 @@
+// https://code.visualstudio.com/docs/editor/userdefinedsnippets
+// DiretórioArquivo: ${TM_DIRECTORY/.*[\\/\\\\](.*)/${1:/pascalcase}/}${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}
+// Diretório: ${TM_DIRECTORY/.*[\\/\\\\](.*)/${1:/pascalcase}/}
+// Arquivo: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}
+// Variáveis: ${1}, ${1:default}, ${1|one,two,three|}...
+
+{
+  "Create ReactJS Component": {
+    "scope": "typescriptreact",
+    "prefix": "reactcomp",
+    "body": [
+      "import type { HTMLAttributes } from 'react'",
+      "",
+      "import { cn } from '@/utils/cn'",
+      "",
+      "export interface Props extends HTMLAttributes<HTMLDivElement> {}",
+      "",
+      "export function ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}({ children, className, ...rest }: Props) {",
+      "  return (",
+      "    <div className={cn('', className)} {...rest}>",
+      "      {children}",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+    ],
+    "description": "Create ReactJS component with all is necessary",
+  },
+}

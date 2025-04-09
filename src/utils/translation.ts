@@ -1,5 +1,5 @@
-import en from "@/locales/en.json"
-import pt from "@/locales/pt.json"
+import en from "@/messages/en.json"
+import pt from "@/messages/pt.json"
 
 export type Locale = "en" | "pt"
 export type Translations = Record<string, any>
@@ -17,8 +17,8 @@ function getNestedValue(obj: any, key: string): any {
   return key.split(".").reduce((acc, part) => acc && acc[part], obj)
 }
 
-export function getTranslation(locale: Locale = "en") {
-  const trans = getTranslationObject(locale)
+export function getTranslation(locale: string = "en") {
+  const trans = getTranslationObject(locale as Locale)
 
   function t(key: string, defaultValue?: string): string {
     const value = getNestedValue(trans, key)

@@ -1,0 +1,4 @@
+{
+  "hello": "Hello World!",
+  "about": "This is a simple example of how to use i18next with React."
+}
