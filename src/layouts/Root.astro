@@ -25,3 +25,11 @@ const locale = props.locale ?? Astro.currentLocale ?? "en"
   </head>
   <slot />
 </html>
+
+<script>
+  import { $theme } from "@/stores/theme"
+
+  $theme.subscribe((theme) => {
+    document.documentElement.dataset.theme = theme
+  })
+</script>

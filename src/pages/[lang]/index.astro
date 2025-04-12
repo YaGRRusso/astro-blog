@@ -1,6 +1,7 @@
 ---
 import Confetti from "@/components/Confetti.astro"
 import Link from "@/components/Link.astro"
+import { User } from "@/components/User"
 import Layout from "@/layouts/Layout.astro"
 import Root from "@/layouts/Root.astro"
 import { getTranslation } from "@/utils/translation"
@@ -16,7 +17,18 @@ const t = getTranslation(lang)
 
 <Root>
   <Layout>
+    <User />
     <Confetti />
+    <h1>AstroPlaceholder</h1>
     <Link href="/about" class="text-3xl font-medium tracking-wide">{t("hello")}</Link>
   </Layout>
 </Root>
+
+<script>
+  import { $user } from "@/stores/user"
+
+  $user.subscribe((user) => {
+    const title = document.querySelector("h1")
+    if (title) title.innerText = user.name
+  })
+</script>

@@ -10,7 +10,7 @@ interface Props extends HTMLAttributes<HTMLSelectElement> {
   currentLocale?: string
 }
 
-export function LanguageSwitch({ currentLocale, className, ...rest }: Props) {
+export function LanguageSelect({ currentLocale, className, ...rest }: Props) {
   const handleRedirect = (locale: string) => {
     const fullPath = window.location.pathname
     const parsedPath = fullPath.replace(BASE_URL, "").replace(/^\/(en|pt)/, "")
