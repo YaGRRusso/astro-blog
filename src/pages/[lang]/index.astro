@@ -1,4 +1,5 @@
 ---
+import Confetti from "@/components/Confetti.astro"
 import Link from "@/components/Link.astro"
 import Layout from "@/layouts/Layout.astro"
 import Root from "@/layouts/Root.astro"
@@ -15,6 +16,7 @@ const t = getTranslation(lang)
 
 <Root>
   <Layout>
+    <Confetti />
     <Link href="/about" class="text-3xl font-medium tracking-wide">{t("hello")}</Link>
   </Layout>
 </Root>
