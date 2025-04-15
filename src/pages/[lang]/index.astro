@@ -12,18 +12,15 @@ export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "pt" } }]
 }
 
-const { lang } = Astro.params
-
 const name = $user.get().name
 
-const t = getTranslation(lang)
+const t = getTranslation(Astro.currentLocale)
 ---
 
 <Root>
   <Layout>
     <User />
     <Confetti />
-    <!-- <h1 set:html={name} /> -->
     <h1>{name}</h1>
     <Link href="/about" class="text-3xl font-medium tracking-wide">{t("hello")}</Link>
     <Characters />

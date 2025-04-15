@@ -1,10 +1,16 @@
-<button class="btn btn-soft btn-success" data-confetti>Celebrate!</button>
+---
+import { getTranslation } from "@/utils/translation"
+
+const t = getTranslation(Astro.currentLocale)
+---
+
+<a href="https://github.com/YaGRRusso" target="_blank" class="link link-hover" data-confetti>{t("createdBy")} Yago</a>
 
 <script>
   import confetti, { type Options } from "canvas-confetti"
   import { fromEvent } from "rxjs"
 
-  const button = document.querySelector<HTMLButtonElement>("button[data-confetti]")
+  const elements = document.querySelectorAll<HTMLElement>("[data-confetti]")
 
   function fire(ratio: number, origin: { x: number; y: number }, opts: Omit<Options, "origin">) {
     confetti({
@@ -17,17 +23,19 @@
     })
   }
 
-  if (button) {
-    fromEvent(button, "click").subscribe((event: Event) => {
-      const target = event.target as HTMLElement
-      const rect = target.getBoundingClientRect()
-      const origin = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+  if (elements) {
+    elements.forEach((element) => {
+      fromEvent(element, "click").subscribe((event: Event) => {
+        const target = event.target as HTMLElement
+        const rect = target.getBoundingClientRect()
+        const origin = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
 
-      fire(0.25, origin, { spread: 26, startVelocity: 55 })
-      fire(0.2, origin, { spread: 60 })
-      fire(0.35, origin, { spread: 100, decay: 0.91, scalar: 0.8 })
-      fire(0.1, origin, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 })
-      fire(0.1, origin, { spread: 120, startVelocity: 45 })
+        fire(0.25, origin, { spread: 26, startVelocity: 55 })
+        fire(0.2, origin, { spread: 60 })
+        fire(0.35, origin, { spread: 100, decay: 0.91, scalar: 0.8 })
+        fire(0.1, origin, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 })
+        fire(0.1, origin, { spread: 120, startVelocity: 45 })
+      })
     })
   }
 </script>

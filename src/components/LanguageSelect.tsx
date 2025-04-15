@@ -21,7 +21,7 @@ export function LanguageSelect({ currentLocale, className, ...rest }: Props) {
 
   return (
     <select
-      className={cn("select", className)}
+      className={cn("select rounded-xl select-xs", className)}
       value={currentLocale ?? "unset"}
       onChange={(ev) => handleRedirect(ev.target.value)}
       {...rest}

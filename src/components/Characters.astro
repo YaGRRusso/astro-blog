@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets"
 import { getCharacters } from "rickmortyapi"
 
 const res = await getCharacters({ species: "Human", status: "Alive" })
@@ -9,7 +10,14 @@ const characters = res.data.results
   {
     characters?.map((character) => (
       <li class="flex items-center gap-2">
-        <img src={character.image} alt={character.name} class="h-16 w-16 rounded-full" />
+        <Image
+          src={character.image}
+          alt={character.name}
+          loading="eager"
+          class="h-16 w-16 rounded-full"
+          width={32}
+          height={32}
+        />
         <div>
           <h3 class="text-lg font-bold">{character.name}</h3>
           <p class="text-gray-500 text-sm">{character.species}</p>
