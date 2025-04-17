@@ -1,18 +1,16 @@
-import { useStore } from "@nanostores/react"
 import { getRelativeLocaleUrl } from "astro:i18n"
 
 import type { HTMLAttributes } from "react"
 
-import { $locale } from "@/stores/locale"
 import { cn } from "@/utils/cn"
-import { t } from "@/utils/i18n"
+import { useTranslation } from "@/utils/i18n"
 
 const BASE_URL = import.meta.env.PUBLIC_BASE_URL
 
 interface Props extends HTMLAttributes<HTMLSelectElement> {}
 
 export function LanguageSelect({ className, ...rest }: Props) {
-  const currentLocale = useStore($locale)
+  const { t } = useTranslation()
 
   const handleRedirect = (newLocale: string) => {
     const fullPath = window.location.pathname
@@ -25,7 +23,7 @@ export function LanguageSelect({ className, ...rest }: Props) {
   return (
     <select
       className={cn("select rounded-xl select-xs", className)}
-      value={currentLocale ?? "unset"}
+      value={"unset"}
       onChange={(ev) => handleRedirect(ev.target.value)}
       {...rest}
     >

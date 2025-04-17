@@ -1,5 +1,7 @@
 ---
-import { t } from "@/utils/i18n"
+import { getTranslation } from "@/utils/i18n"
+
+const { t } = getTranslation(Astro.currentLocale)
 ---
 
 <a href="https://github.com/YaGRRusso" target="_blank" class="link link-hover" data-confetti>
