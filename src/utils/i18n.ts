@@ -48,12 +48,8 @@ function translate(locale: Locale, key: string, values?: InterpolationValues, de
   return defaultValue || key
 }
 
-// export function t(key: string, values?: InterpolationValues, defaultValue?: string) {
-//   const currentLocale = ($locale.get() ?? "en") as Locale
-//   return translate(currentLocale, key, values, defaultValue)
-// }
-
-export function getTranslation(locale: string = "en") {
+export function getTranslation(lang?: string) {
+  const locale = lang ?? $locale.get() ?? "en"
   const t = (key: string, values?: InterpolationValues, defaultValue?: string) => {
     return translate(locale as Locale, key, values, defaultValue)
   }
@@ -62,6 +58,6 @@ export function getTranslation(locale: string = "en") {
 }
 
 export function useTranslation() {
-  const locale = useStore($locale)
-  return getTranslation(locale)
+  const lang = useStore($locale)
+  return getTranslation(lang)
 }

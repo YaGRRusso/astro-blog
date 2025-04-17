@@ -3,14 +3,12 @@ import Characters from "@/components/Characters.astro"
 import Link from "@/components/Link.astro"
 import Layout from "@/layouts/Layout.astro"
 import Root from "@/layouts/Root.astro"
-import { initializeLocale } from "@/stores/locale"
 import { getTranslation } from "@/utils/i18n"
 
 export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "pt" } }]
 }
 
-initializeLocale(Astro.currentLocale)
 const { t } = getTranslation(Astro.currentLocale)
 ---
 

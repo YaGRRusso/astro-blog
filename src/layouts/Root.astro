@@ -3,14 +3,18 @@ import Meta from "./Meta.astro"
 
 import { ClientRouter } from "astro:transitions"
 
-import type { Props as MetaProps } from "./Meta.astro"
-
 import "../styles/global.css"
+import type { Props as MetaProps } from "./Meta.astro"
+import type { Locale } from "@/utils/i18n"
+
+import { $locale } from "@/stores/locale"
 
 interface Props extends MetaProps {}
 
 const props = Astro.props
 const currentLocale = props.locale ?? Astro.currentLocale ?? "en"
+
+$locale.set(currentLocale as Locale)
 ---
 
 <!doctype html>
@@ -27,7 +31,13 @@ const currentLocale = props.locale ?? Astro.currentLocale ?? "en"
 </html>
 
 <script>
+  import type { Locale } from "@/utils/i18n"
+
+  import { $locale } from "@/stores/locale"
   import { $theme } from "@/stores/theme"
+
+  const lang = document.documentElement.lang
+  $locale.set(lang as Locale)
 
   $theme.subscribe((theme) => {
     document.documentElement.dataset.theme = theme
