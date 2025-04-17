@@ -2,8 +2,6 @@
 import Confetti from "@/components/Confetti.astro"
 import { LanguageSelect } from "@/components/LanguageSelect"
 import { ThemeSwitch } from "@/components/ThemeSwitch"
-
-const locale = Astro.currentLocale
 ---
 
 <body class="flex min-h-screen flex-col bg-base-100 text-base-content">
@@ -11,7 +9,7 @@ const locale = Astro.currentLocale
     <div class="container flex items-center justify-between gap-4 p-4">
       <h2 class="text-3xl font-medium tracking-wide">Rick and Morty</h2>
       <div class="flex items-center gap-2">
-        <LanguageSelect currentLocale={locale} client:load />
+        <LanguageSelect client:load />
         <ThemeSwitch client:load />
       </div>
     </div>

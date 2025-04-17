@@ -1,37 +1,19 @@
 ---
 import Characters from "@/components/Characters.astro"
-import Confetti from "@/components/Confetti.astro"
 import Link from "@/components/Link.astro"
-import { User } from "@/components/User"
 import Layout from "@/layouts/Layout.astro"
 import Root from "@/layouts/Root.astro"
-import { $user } from "@/stores/user"
-import { getTranslation } from "@/utils/translation"
+import { t } from "@/utils/i18n"
 
 export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "pt" } }]
 }
-
-const name = $user.get().name
-
-const t = getTranslation(Astro.currentLocale)
 ---
 
 <Root>
   <Layout>
-    <User />
-    <Confetti />
-    <h1>{name}</h1>
     <Link href="/about" class="text-3xl font-medium tracking-wide">{t("hello")}</Link>
+    <p>{t("itemsCount", { count: 5 })}</p>
     <Characters />
   </Layout>
 </Root>
-
-<script>
-  import { $user } from "@/stores/user"
-
-  $user.subscribe((user) => {
-    const title = document.querySelector("h1")
-    if (title) title.innerText = user.name
-  })
-</script>

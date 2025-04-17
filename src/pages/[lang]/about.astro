@@ -2,15 +2,11 @@
 import Link from "@/components/Link.astro"
 import Layout from "@/layouts/Layout.astro"
 import Root from "@/layouts/Root.astro"
-import { getTranslation } from "@/utils/translation"
+import { t } from "@/utils/i18n"
 
 export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "pt" } }]
 }
-
-const { lang } = Astro.params
-
-const t = getTranslation(lang)
 ---
 
 <Root>

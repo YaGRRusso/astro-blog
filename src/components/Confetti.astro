@@ -1,10 +1,10 @@
 ---
-import { getTranslation } from "@/utils/translation"
-
-const t = getTranslation(Astro.currentLocale)
+import { t } from "@/utils/i18n"
 ---
 
-<a href="https://github.com/YaGRRusso" target="_blank" class="link link-hover" data-confetti>{t("createdBy")} Yago</a>
+<a href="https://github.com/YaGRRusso" target="_blank" class="link link-hover" data-confetti>
+  {t("createdBy", { name: "Yago Russo" })}
+</a>
 
 <script>
   import confetti, { type Options } from "canvas-confetti"

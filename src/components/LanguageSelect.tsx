@@ -1,21 +1,24 @@
+import { useStore } from "@nanostores/react"
 import { getRelativeLocaleUrl } from "astro:i18n"
 
 import type { HTMLAttributes } from "react"
 
+import { $locale } from "@/stores/locale"
 import { cn } from "@/utils/cn"
+import { t } from "@/utils/i18n"
 
 const BASE_URL = import.meta.env.PUBLIC_BASE_URL
 
-interface Props extends HTMLAttributes<HTMLSelectElement> {
-  currentLocale?: string
-}
+interface Props extends HTMLAttributes<HTMLSelectElement> {}
 
-export function LanguageSelect({ currentLocale, className, ...rest }: Props) {
-  const handleRedirect = (locale: string) => {
+export function LanguageSelect({ className, ...rest }: Props) {
+  const currentLocale = useStore($locale)
+
+  const handleRedirect = (newLocale: string) => {
     const fullPath = window.location.pathname
     const parsedPath = fullPath.replace(BASE_URL, "").replace(/^\/(en|pt)/, "")
 
-    const targetUrl = getRelativeLocaleUrl(locale, parsedPath)
+    const targetUrl = getRelativeLocaleUrl(newLocale, parsedPath)
     window.location.href = targetUrl
   }
 
@@ -27,7 +30,7 @@ export function LanguageSelect({ currentLocale, className, ...rest }: Props) {
       {...rest}
     >
       <option value="unset" disabled={true}>
-        Select a language
+        {t("selectLanguage")}
       </option>
       <option value="en">English (en)</option>
       <option value="pt">Portugues (pt)</option>

@@ -1,0 +1,6 @@
+{
+  "hello": "Hello World!",
+  "selectLanguage": "Select the language",
+  "createdBy": "Created by {name}",
+  "itemsCount": "{count, plural, =0 {No items} =1 {One item} other {# items}}"
+}

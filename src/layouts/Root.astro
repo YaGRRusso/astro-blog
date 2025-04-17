@@ -6,15 +6,18 @@ import { ClientRouter } from "astro:transitions"
 import type { Props as MetaProps } from "./Meta.astro"
 
 import "../styles/global.css"
+import { initializeLocale } from "@/stores/locale"
 
 interface Props extends MetaProps {}
 
 const props = Astro.props
-const locale = props.locale ?? Astro.currentLocale ?? "en"
+const currentLocale = props.locale ?? Astro.currentLocale ?? "en"
+
+initializeLocale(currentLocale)
 ---
 
 <!doctype html>
-<html lang={locale}>
+<html lang={currentLocale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
