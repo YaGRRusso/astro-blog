@@ -17,13 +17,7 @@ export function LanguageSelect({ className, ...rest }: Props) {
     const parsedPath = fullPath.replace(BASE_URL, "").replace(/^\/(en|pt)/, "")
 
     const targetUrl = getRelativeLocaleUrl(newLocale, parsedPath)
-    console.log("fullPath", fullPath)
-    console.log("parsedPath", parsedPath)
-    console.log("targetUrl", targetUrl)
-
-    setTimeout(() => {
-      window.location.href = targetUrl
-    }, 5000)
+    window.location.href = targetUrl
   }
 
   return (
