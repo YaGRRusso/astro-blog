@@ -5,57 +5,53 @@ import type { HTMLAttributes } from "react"
 import { cn } from "@/utils/cn"
 import { useTranslation } from "@/utils/i18n"
 
-// Garantir que BASE_URL comece com / e termine sem / para consistência
-// Embora import.meta.env.PUBLIC_BASE_URL já deva ser 'astro-blog/'
+// Cálculo do prefixo base (como antes)
 const rawBaseUrl = import.meta.env.PUBLIC_BASE_URL ?? ""
-// Remover barras extras e garantir uma barra inicial e nenhuma final
 const cleanBaseSegment = rawBaseUrl.replace(/^\/|\/$/g, "")
-const basePrefix = cleanBaseSegment ? `/${cleanBaseSegment}` : ""
+const basePrefix = cleanBaseSegment ? `/${cleanBaseSegment}` : "" // Ex: /astro-blog
 
 interface Props extends HTMLAttributes<HTMLSelectElement> {}
 
 export function LanguageSelect({ className, ...rest }: Props) {
-  const { t, locale } = useTranslation()
+  // Obtém a função t e o locale ATUAL reativamente
+  const { t, locale: currentLocale } = useTranslation()
 
   const handleRedirect = (newLocale: string) => {
-    const fullPath = window.location.pathname // Ex: /astro-blog/en/some/page or /astro-blog/en/
+    const currentPathname = window.location.pathname // Ex: /astro-blog/en/about
 
-    // 1. Remover o basePrefix se existir
-    let pathWithoutBase = fullPath
-    if (basePrefix && fullPath.startsWith(basePrefix)) {
-      pathWithoutBase = fullPath.substring(basePrefix.length) // Ex: /en/some/page or /en/
+    // 1. Construir o prefixo completo para o locale atual
+    //    Ex: /astro-blog/en
+    const currentLocalePrefix = `${basePrefix}/${currentLocale}`
+
+    // 2. Determinar o caminho relativo dentro do locale atual
+    let relativePath = "/" // Padrão é a raiz do locale
+    if (currentPathname.startsWith(currentLocalePrefix)) {
+      relativePath = currentPathname.substring(currentLocalePrefix.length) // Remove /astro-blog/en
+      // Garante que o caminho resultante comece com / se não for vazio
+      if (relativePath === "" || !relativePath.startsWith("/")) {
+        relativePath = "/" + relativePath
+      }
     }
+    // Se o caminho não começar com o prefixo esperado (improvável com a config atual),
+    // ele usará "/" como fallback, redirecionando para a raiz do novo locale.
 
-    // 2. Remover o locale prefix (/en ou /pt) do início
-    //    Certifique-se de que o locale atual (do hook) seja usado na regex
-    const localePattern = new RegExp(`^\\/(${locale})(\\/|$)`)
-    const pathWithoutBaseAndLocale = pathWithoutBase.replace(localePattern, "/") // Substitui /en/ ou /en por /
+    console.log("Debug Redirect (Simplified):", {
+      currentPathname, // Ex: /astro-blog/en/about
+      basePrefix, // Ex: /astro-blog
+      currentLocale, // Ex: en
+      currentLocalePrefix, // Ex: /astro-blog/en
+      relativePath, // Ex: /about  (Este é o caminho que queremos)
+    })
 
-    // 3. Limpar barras duplicadas (caso a substituição deixe //) e garantir que comece com /
-    let parsedPath = pathWithoutBaseAndLocale.replace(/\/{2,}/g, "/")
-    if (!parsedPath.startsWith("/")) {
-      parsedPath = "/" + parsedPath
-    }
-    // Se o resultado for apenas uma barra e o original não era só base+locale, pode precisar de ajuste
-    // Mas getRelativeLocaleUrl geralmente lida bem com '/' para a raiz do locale
-
-    console.log("Debug Redirect:", {
-      fullPath,
-      basePrefix,
-      pathWithoutBase,
-      locale,
-      pathWithoutBaseAndLocale,
-      parsedPath,
-    }) // Adicionar log para depuração
-
-    const targetUrl = getRelativeLocaleUrl(newLocale, parsedPath) // Ex: getRelativeLocaleUrl('pt', '/some/page') ou getRelativeLocaleUrl('pt', '/')
+    // 3. Gerar a URL para o NOVO locale usando o caminho relativo extraído
+    const targetUrl = getRelativeLocaleUrl(newLocale, relativePath)
     window.location.href = targetUrl
   }
 
   return (
     <select
       className={cn("select rounded-xl select-xs", className)}
-      value={locale ?? "unset"}
+      value={currentLocale ?? "unset"} // Usa o locale reativo do hook
       onChange={(ev) => handleRedirect(ev.target.value)}
       {...rest}
     >
