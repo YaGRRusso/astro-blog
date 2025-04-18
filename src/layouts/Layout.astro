@@ -9,7 +9,7 @@ import { ThemeSwitch } from "@/components/ThemeSwitch"
     <div class="container flex items-center justify-between gap-4 p-4">
       <h2 class="text-3xl font-medium tracking-wide">Rick and Morty</h2>
       <div class="flex items-center gap-2">
-        <LanguageSelect client:load />
+        <LanguageSelect client:only="react" />
         <ThemeSwitch client:load />
       </div>
     </div>
