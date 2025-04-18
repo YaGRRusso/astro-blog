@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets"
+
+import type { Character } from "rickmortyapi"
+
+interface Props extends Character {}
+
+const { episode, gender, id, image, location, name, origin, species, status } = Astro.props
+---
+
+<div class="group card card-side bg-base-200" data-status={status} id={id.toString()}>
+  <figure class="w-full max-w-20 sm:max-w-32">
+    <Image src={image} alt={name} loading="eager" width={32} height={32} />
+  </figure>
+  <div class="card-body flex-1 gap-4">
+    <div class="flex flex-col">
+      <div class="flex items-center justify-between gap-2">
+        <a href="" class="card-title link link-hover">{name}</a>
+        <div class="tooltip">
+          <div class="tooltip-content">
+            {status}
+          </div>
+          <div
+            class="status group-data-[status=Alive]:status-success group-data-[status=Dead]:status-error group-data-[status=unknown]:status-warning"
+          >
+          </div>
+        </div>
+      </div>
+      <span class="text-muted">{gender} - {species}</span>
+    </div>
+    <p class="text-xs">
+      {name} came from
+      <a
+        class="link link-hover group-data-[status=Alive]:link-success group-data-[status=Dead]:link-error group-data-[status=unknown]:link-warning"
+        href=""
+      >
+        {origin.name}
+      </a>
+      appeared on
+      <button
+        class="link link-hover group-data-[status=Alive]:link-success group-data-[status=Dead]:link-error group-data-[status=unknown]:link-warning"
+      >
+        {episode.length} episodes
+      </button>
+      and was last seen on
+      <a
+        class="link link-hover group-data-[status=Alive]:link-success group-data-[status=Dead]:link-error group-data-[status=unknown]:link-warning"
+        href=""
+      >
+        {location.name}
+      </a>
+    </p>
+  </div>
+</div>

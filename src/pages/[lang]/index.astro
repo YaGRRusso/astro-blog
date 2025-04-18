@@ -1,21 +1,15 @@
 ---
 import Characters from "@/components/Characters.astro"
-import Link from "@/components/Link.astro"
 import Layout from "@/layouts/Layout.astro"
 import Root from "@/layouts/Root.astro"
-import { getTranslation } from "@/utils/i18n"
 
 export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "pt" } }]
 }
-
-const { t } = getTranslation(Astro.currentLocale)
 ---
 
 <Root>
   <Layout>
-    <Link href="/about" class="text-3xl font-medium tracking-wide">{t("hello")}</Link>
-    <p>{t("itemsCount", { count: 5 })}</p>
     <Characters />
   </Layout>
 </Root>
