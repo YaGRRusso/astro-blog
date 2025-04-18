@@ -20,7 +20,10 @@ export function LanguageSelect({ className, ...rest }: Props) {
     console.log("fullPath", fullPath)
     console.log("parsedPath", parsedPath)
     console.log("targetUrl", targetUrl)
-    // window.location.href = targetUrl
+
+    setTimeout(() => {
+      window.location.href = targetUrl
+    }, 5000)
   }
 
   return (
