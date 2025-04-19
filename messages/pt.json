@@ -6,10 +6,20 @@
   },
   "pages": {
     "characters": {
+      "meta": {
+        "description": "Personagens de Rick e Morty",
+        "keywords": "Rick e Morty, personagens",
+        "title": "Personagens"
+      },
       "title": "Personagens",
       "description": "Lista de personagens"
     },
     "character": {
+      "meta": {
+        "description": "Detalhes do personagem",
+        "keywords": "Rick e Morty, personagens, detalhes",
+        "title": "{name} - Detalhes"
+      },
       "title": "Detalhes do personagem",
       "description": "Detalhes do personagem"
     }

@@ -19,7 +19,11 @@ export async function getStaticPaths() {
 const { t } = getTranslation(Astro.currentLocale)
 ---
 
-<Root>
+<Root
+  title={t("pages.characters.title")}
+  description={t("pages.characters.description")}
+  keywords={t("pages.characters.keywords")}
+>
   <Layout>
     <Hero title={t("pages.characters.title")} description={t("pages.characters.description")}>
       <Users slot="icon" />

@@ -6,10 +6,20 @@
   },
   "pages": {
     "characters": {
+      "meta": {
+        "description": "Rick and Morty characters",
+        "keywords": "Rick and Morty, characters",
+        "title": "Characters"
+      },
       "title": "Characters",
       "description": "List of characters"
     },
     "character": {
+      "meta": {
+        "description": "Character details",
+        "keywords": "Rick and Morty, characters, details",
+        "title": "{name} - Details"
+      },
       "title": "Character details",
       "description": "Character details"
     }
