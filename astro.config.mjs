@@ -18,6 +18,6 @@ export default defineConfig({
   i18n: {
     defaultLocale: "en",
     locales: ["en", "pt"],
-    routing: { fallbackType: "rewrite" },
+    routing: { prefixDefaultLocale: true, redirectToDefaultLocale: false, fallbackType: "rewrite" },
   },
 })
