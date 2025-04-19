@@ -1,30 +1,48 @@
 ---
-import Meta from "./Meta.astro"
-
 import { ClientRouter } from "astro:transitions"
 
 import "../styles/global.css"
-import type { Props as MetaProps } from "./Meta.astro"
 import type { Locale } from "@/utils/i18n"
 
 import { $locale } from "@/stores/locale"
 
-interface Props extends MetaProps {}
+interface Props {
+  author?: string
+  description?: string
+  image?: string
+  imageAlt?: string
+  keywords?: string
+  locale?: string
+  title?: string
+  url?: string
+}
 
-const props = Astro.props
-const currentLocale = props.locale ?? Astro.currentLocale ?? "en"
+const { author = "Yago Russo", title = "Astro", description, image, imageAlt, keywords, locale, url } = Astro.props
 
+const currentLocale = locale ?? Astro.currentLocale ?? "en"
 $locale.set(currentLocale as Locale)
 ---
 
 <!doctype html>
 <html lang={currentLocale}>
   <head>
+    <title>{title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/astro-blog/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <Meta {...props} />
+    <meta name="author" content={author} />
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="image" content={image} />
+    <meta name="keywords" content={keywords} />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={imageAlt || title} />
+    <meta property="og:locale" content={currentLocale} />
     <ClientRouter />
   </head>
   <slot />
@@ -36,8 +54,10 @@ $locale.set(currentLocale as Locale)
   import { $locale } from "@/stores/locale"
   import { $theme } from "@/stores/theme"
 
-  const lang = document.documentElement.lang
-  $locale.set(lang as Locale)
+  document.addEventListener("astro:page-load", () => {
+    const currentLang = document.documentElement.lang
+    if (currentLang && currentLang !== $locale.get()) $locale.set(currentLang as Locale)
+  })
 
   $theme.subscribe((theme) => {
     document.documentElement.dataset.theme = theme

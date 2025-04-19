@@ -2,6 +2,11 @@
 import Confetti from "@/components/Confetti.astro"
 import { LanguageSelect } from "@/components/LanguageSelect"
 import { ThemeSwitch } from "@/components/ThemeSwitch"
+import { getTranslation } from "@/utils/i18n"
+
+const { t } = getTranslation(Astro.currentLocale)
+
+const currentPath = Astro.url.pathname
 ---
 
 <body class="flex min-h-screen flex-col bg-base-100 text-base-content">
@@ -9,17 +14,21 @@ import { ThemeSwitch } from "@/components/ThemeSwitch"
     <div class="container flex items-center justify-between gap-4">
       <h2 class="text-3xl font-medium tracking-wide">Rick and Morty</h2>
       <div class="flex items-center gap-2">
-        <LanguageSelect client:only="react" />
+        <LanguageSelect currentPath={currentPath} client:load />
         <ThemeSwitch client:load />
       </div>
     </div>
   </header>
-  <main class="container flex flex-1 flex-col items-center justify-center gap-4 py-16">
+  <main class="container flex flex-1 flex-col items-center justify-center gap-8 py-16">
     <slot />
   </main>
   <footer class="bg-base-200">
     <div class="container flex items-center justify-center gap-4">
-      <Confetti />
+      <Confetti>
+        <a href="https://github.com/YaGRRusso" target="_blank" class="link link-hover">
+          {t("layout.createdBy", { name: "Yago Russo" })}
+        </a>
+      </Confetti>
     </div>
   </footer>
 </body>

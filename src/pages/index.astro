@@ -1,3 +1,37 @@
 ---
+import "../styles/global.css"
 
+import { ShieldCheck } from "@phosphor-icons/react"
+
+const DEFAULT_LANGUAGE = "en"
+const PUBLIC_SITE_URL = import.meta.env.PUBLIC_SITE_URL
+const PUBLIC_BASE_URL = import.meta.env.PUBLIC_BASE_URL
+
+const metaRefreshUrl = `/${PUBLIC_BASE_URL}${DEFAULT_LANGUAGE}/`
+const metaCanonicalUrl = `${PUBLIC_SITE_URL}${PUBLIC_BASE_URL}${DEFAULT_LANGUAGE}/`
 ---
+
+<!doctype html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting</title>
+  <meta http-equiv="refresh" content={`1; url=${metaRefreshUrl}`} />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href={metaCanonicalUrl} />
+</head>
+
+<body>
+  <div class="flex flex-col items-center justify-center gap-2 p-8 text-3xl text-muted">
+    <ShieldCheck />
+    <div class="loading loading-dots"></div>
+  </div>
+</body>
+
+<script>
+  import { $theme } from "@/stores/theme"
+
+  $theme.subscribe((theme) => {
+    document.documentElement.dataset.theme = theme
+  })
+</script>

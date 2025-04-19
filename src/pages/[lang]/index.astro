@@ -1,15 +1,31 @@
 ---
-import Characters from "@/components/Characters.astro"
+import { Users } from "@phosphor-icons/react"
+import { getCharacters } from "rickmortyapi"
+
+import CharacterCard from "@/components/CharacterCard.astro"
+import Hero from "@/components/Hero.astro"
 import Layout from "@/layouts/Layout.astro"
 import Root from "@/layouts/Root.astro"
+import { getTranslation } from "@/utils/i18n"
+import { tc } from "@/utils/tc"
+
+const res = await tc(getCharacters({ species: "Human", status: "Alive" }))
+const characters = res ? res.data.results : []
 
 export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "pt" } }]
 }
+
+const { t } = getTranslation(Astro.currentLocale)
 ---
 
 <Root>
   <Layout>
-    <Characters />
+    <Hero title={t("pages.characters.title")} description={t("pages.characters.description")}>
+      <Users slot="icon" />
+    </Hero>
+    <ul class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {characters?.map((character) => <CharacterCard {...character} />)}
+    </ul>
   </Layout>
 </Root>

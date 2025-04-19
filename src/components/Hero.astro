@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+interface Props extends HTMLAttributes<"div"> {
+  title: string
+  description?: string
+}
+
+const { title, description, ...props } = Astro.props as Props
+---
+
+<div class="hero" {...props}>
+  <div class="hero-content flex-col gap-2 px-0 text-center">
+    {
+      Astro.slots.has("icon") && (
+        <div class="text-3xl">
+          <slot name="icon" />
+        </div>
+      )
+    }
+    <h1 class="text-4xl font-bold tracking-wider text-accent sm:text-5xl">
+      {title}
+    </h1>
+    {description && <p class="max-w-3xl text-muted">{description}</p>}
+    <slot />
+  </div>
+</div>

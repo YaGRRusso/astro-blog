@@ -1,12 +1,14 @@
 ---
-import { getTranslation } from "@/utils/i18n"
+import type { HTMLAttributes } from "astro/types"
 
-const { t } = getTranslation(Astro.currentLocale)
+interface Props extends HTMLAttributes<"div"> {}
+
+const { ...props } = Astro.props as Props
 ---
 
-<a href="https://github.com/YaGRRusso" target="_blank" class="link link-hover" data-confetti>
-  {t("createdBy", { name: "Yago Russo" })}
-</a>
+<div data-confetti {...props}>
+  <slot />
+</div>
 
 <script>
   import confetti, { type Options } from "canvas-confetti"

@@ -3,14 +3,12 @@ import { getRelativeLocaleUrl } from "astro:i18n"
 
 import type { HTMLAttributes } from "astro/types"
 
-interface Props extends HTMLAttributes<"a"> {
-  href: string
-}
+interface Props extends HTMLAttributes<"a"> {}
 
 const { href, ...props } = Astro.props as Props
 const locale = Astro.currentLocale
 ---
 
-<a href={getRelativeLocaleUrl(locale ?? "en", href)} {...props}>
+<a href={getRelativeLocaleUrl(locale ?? "en", typeof href === "string" ? href : "")} {...props}>
   <slot />
 </a>

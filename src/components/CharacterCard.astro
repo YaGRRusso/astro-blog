@@ -1,14 +1,24 @@
 ---
 import { Image } from "astro:assets"
 
+import type { HTMLAttributes } from "astro/types"
 import type { Character } from "rickmortyapi"
 
-interface Props extends Character {}
+import { getTranslation } from "@/utils/i18n"
 
-const { episode, gender, id, image, location, name, origin, species, status } = Astro.props
+interface Props extends Omit<HTMLAttributes<"div">, "id">, Character {}
+
+const { episode, gender, id, image, location, name, origin, species, status, ...props } = Astro.props
+
+const { t } = getTranslation(Astro.currentLocale)
+
+const linkClass =
+  "group-data-[status=alive]:link-success group-data-[status=dead]:link-error group-data-[status=unknown]:link-warning"
+const statusClass =
+  "group-data-[status=alive]:status-success group-data-[status=dead]:status-error group-data-[status=unknown]:status-warning"
 ---
 
-<div class="group card card-side bg-base-200" data-status={status} id={id.toString()}>
+<div class="group card card-side bg-base-200" data-status={status.toLowerCase()} id={id.toString()} {...props}>
   <figure class="w-full max-w-20 sm:max-w-32">
     <Image src={image} alt={name} loading="eager" width={32} height={32} />
   </figure>
@@ -18,37 +28,38 @@ const { episode, gender, id, image, location, name, origin, species, status } = 
         <a href="" class="card-title link link-hover">{name}</a>
         <div class="tooltip">
           <div class="tooltip-content">
-            {status}
+            {t("components.characterCard.status." + status.toLowerCase())}
           </div>
-          <div
-            class="status group-data-[status=Alive]:status-success group-data-[status=Dead]:status-error group-data-[status=unknown]:status-warning"
-          >
-          </div>
+          <div class:list={["status", statusClass]}></div>
         </div>
       </div>
-      <span class="text-muted">{gender} - {species}</span>
+      <span class="text-muted"
+        >{t("components.characterCard.gender." + gender.toLowerCase())} - {
+          t("components.characterCard.especies." + species.toLocaleLowerCase())
+        }</span
+      >
     </div>
-    <p class="text-xs">
-      {name} came from
-      <a
-        class="link link-hover group-data-[status=Alive]:link-success group-data-[status=Dead]:link-error group-data-[status=unknown]:link-warning"
-        href=""
-      >
-        {origin.name}
-      </a>
-      appeared on
-      <button
-        class="link link-hover group-data-[status=Alive]:link-success group-data-[status=Dead]:link-error group-data-[status=unknown]:link-warning"
-      >
-        {episode.length} episodes
-      </button>
-      and was last seen on
-      <a
-        class="link link-hover group-data-[status=Alive]:link-success group-data-[status=Dead]:link-error group-data-[status=unknown]:link-warning"
-        href=""
-      >
-        {location.name}
-      </a>
+    <p>
+      {
+        t("components.characterCard.description", {
+          name,
+          origin: (
+            <a class:list={["link link-hover", linkClass]} href="">
+              {origin.name}
+            </a>
+          ),
+          episodes: (
+            <button class:list={["link link-hover", linkClass]}>
+              {t("components.characterCard.episodes", { count: episode.length })}
+            </button>
+          ),
+          location: (
+            <a class:list={["link link-hover", linkClass]} href="">
+              {location.name}
+            </a>
+          ),
+        })
+      }
     </p>
   </div>
 </div>

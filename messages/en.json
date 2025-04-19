@@ -1,6 +1,39 @@
 {
-  "hello": "Hello World!",
-  "currentLanguage": "Language {lang}",
-  "createdBy": "Created by {name}",
-  "itemsCount": "{count, plural, =0 {No items} =1 {One item} other {# items}}"
+  "layout": {
+    "currentLanguage": "Language ({lang})",
+    "createdBy": "Created by {name}",
+    "itemsCount": "{count, plural, =0 {No items} =1 {One item} other {# items}}"
+  },
+  "pages": {
+    "characters": {
+      "title": "Characters",
+      "description": "List of characters"
+    },
+    "character": {
+      "title": "Character details",
+      "description": "Character details"
+    }
+  },
+  "components": {
+    "characterCard": {
+      "description": "{name} came from {origin} appeared in {episodes}, and was last seen in {location}.",
+      "episodes": "{count, plural, =0 {no episode} =1 {one episode} other {# episodes}}",
+      "gender": {
+        "male": "Male",
+        "female": "Female",
+        "genderless": "Genderless",
+        "unknown": "Unknown"
+      },
+      "especies": {
+        "human": "Human",
+        "humanoid": "Humanoid",
+        "unknown": "Unknown"
+      },
+      "status": {
+        "alive": "Alive",
+        "dead": "Dead",
+        "unknown": "Unknown"
+      }
+    }
+  }
 }
