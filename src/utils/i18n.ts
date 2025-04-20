@@ -45,6 +45,7 @@ function translate(locale: Locale, key: string, values?: InterpolationValues, de
       return defaultValue || key
     }
   }
+
   return defaultValue || key
 }
 

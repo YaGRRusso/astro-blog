@@ -28,14 +28,14 @@ const statusClass =
         <a href="" class="card-title link link-hover">{name}</a>
         <div class="tooltip">
           <div class="tooltip-content">
-            {t("components.characterCard.status." + status.toLowerCase())}
+            {t("components.characterCard.status." + status.toLowerCase(), {}, t("commons.unknown"))}
           </div>
           <div class:list={["status", statusClass]}></div>
         </div>
       </div>
       <span class="text-muted"
-        >{t("components.characterCard.gender." + gender.toLowerCase())} - {
-          t("components.characterCard.especies." + species.toLocaleLowerCase())
+        >{t("components.characterCard.gender." + gender.toLowerCase(), {}, t("commons.unknown"))} - {
+          t("components.characterCard.especies." + species.toLocaleLowerCase(), {}, t("commons.unknown"))
         }</span
       >
     </div>

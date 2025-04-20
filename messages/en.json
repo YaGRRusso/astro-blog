@@ -1,8 +1,11 @@
 {
+  "commons": {
+    "unknown": "Unknown",
+    "itemsCount": "{count, plural, =0 {No items} =1 {One item} other {# items}}"
+  },
   "layout": {
     "currentLanguage": "Language ({lang})",
-    "createdBy": "Created by {name}",
-    "itemsCount": "{count, plural, =0 {No items} =1 {One item} other {# items}}"
+    "createdBy": "Created by {name}"
   },
   "pages": {
     "characters": {
@@ -31,18 +34,16 @@
       "gender": {
         "male": "Male",
         "female": "Female",
-        "genderless": "Genderless",
-        "unknown": "Unknown"
+        "genderless": "Genderless"
       },
       "especies": {
         "human": "Human",
         "humanoid": "Humanoid",
-        "unknown": "Unknown"
+        "alien": "Alien"
       },
       "status": {
         "alive": "Alive",
-        "dead": "Dead",
-        "unknown": "Unknown"
+        "dead": "Dead"
       }
     }
   }

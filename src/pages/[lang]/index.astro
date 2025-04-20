@@ -9,7 +9,7 @@ import Root from "@/layouts/Root.astro"
 import { getTranslation } from "@/utils/i18n"
 import { tc } from "@/utils/tc"
 
-const res = await tc(getCharacters({ species: "Human", status: "Alive" }))
+const res = await tc(getCharacters())
 const characters = res ? res.data.results : []
 
 export async function getStaticPaths() {
@@ -31,5 +31,17 @@ const { t } = getTranslation(Astro.currentLocale)
     <ul class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {characters?.map((character) => <CharacterCard {...character} />)}
     </ul>
+    {
+      res?.data.info?.pages && res.data.info.pages > 1 && (
+        <div class="flex w-full items-center justify-between gap-2">
+          <span class="text-sm font-medium">{t("commons.itemsCount", { count: res.data.info.count })}</span>
+          <div class="join">
+            <button class="btn join-item btn-soft">«</button>
+            <button class="btn join-item btn-soft">Page 1</button>
+            <button class="btn join-item btn-soft">»</button>
+          </div>
+        </div>
+      )
+    }
   </Layout>
 </Root>

@@ -1,8 +1,11 @@
 {
+  "commons": {
+    "unknown": "Desconhecido",
+    "itemsCount": "{count, plural, =0 {Nenhum item} =1 {Um item} other {# itens}}"
+  },
   "layout": {
     "currentLanguage": "Idioma ({lang})",
-    "createdBy": "Criado por {name}",
-    "itemsCount": "{count, plural, =0 {Nenhum item} =1 {Um item} other {# itens}}"
+    "createdBy": "Criado por {name}"
   },
   "pages": {
     "characters": {
@@ -31,18 +34,16 @@
       "gender": {
         "male": "Homem",
         "female": "Mulher",
-        "genderless": "Sem gênero",
-        "unknown": "Desconhecido"
+        "genderless": "Sem gênero"
       },
       "especies": {
         "human": "Humano",
         "humanoid": "Humanoide",
-        "unknown": "Desconhecido"
+        "alien": "Alienígena"
       },
       "status": {
         "alive": "Vivo",
-        "dead": "Morto",
-        "unknown": "Desconhecido"
+        "dead": "Morto"
       }
     }
   }
