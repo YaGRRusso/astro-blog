@@ -24,11 +24,11 @@ export function LanguageSelect({ className, currentPath, ...props }: Props) {
   )
 
   return (
-    <div className={cn("dropdown", className)} {...props}>
+    <div className={cn("dropdown dropdown-center sm:dropdown-end", className)} {...props}>
       <button tabIndex={0} role="button" className="btn rounded-xl border-input text-base-content btn-outline btn-xs">
-        {t("layout.currentLanguage", { lang: locale.toUpperCase() })}
+        <span className="ellipsis">{t("layout.currentLanguage", { lang: locale.toUpperCase() })}</span>
       </button>
-      <ul tabIndex={0} className="dropdown-content menu z-20 my-2 w-52 rounded-box border border-input bg-base-200 p-2">
+      <ul tabIndex={0} className="dropdown-content menu z-20 my-2 w-40 rounded-box border border-input bg-base-200 p-2">
         <li>
           <a href={getRedirect("pt")}>🇧🇷 Português (PT)</a>
         </li>

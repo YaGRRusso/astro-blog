@@ -1,5 +1,6 @@
 {
   "commons": {
+    "page": "Página {page}",
     "unknown": "Desconhecido",
     "itemsCount": "{count, plural, =0 {Nenhum item} =1 {Um item} other {# itens}}"
   },

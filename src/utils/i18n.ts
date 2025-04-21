@@ -3,11 +3,16 @@ import { IntlMessageFormat } from "intl-messageformat"
 import enMessages from "messages/en.json"
 import ptMessages from "messages/pt.json"
 
+import type { ReactElement } from "react"
+
 import { $locale } from "@/stores/locale"
 
 export type Locale = "en" | "pt"
 export type Translations = Record<string, any>
-export type InterpolationValues = Record<string, string | number | boolean | Date | null | undefined>
+export type InterpolationValues = Record<
+  string,
+  Element | ReactElement | string | number | boolean | Date | null | undefined
+>
 
 const translations: Record<Locale, Translations> = {
   en: enMessages,
@@ -38,7 +43,7 @@ function translate(locale: Locale, key: string, values?: InterpolationValues, de
         messageCache[cacheKey] = msg
       }
 
-      const formattedValues = values as Record<string, string | number | boolean | Date | null | undefined>
+      const formattedValues = values as InterpolationValues
       return msg.format(formattedValues) as string
     } catch (error) {
       console.error(`Error formatting message key "${key}" for locale "${locale}":`, error)

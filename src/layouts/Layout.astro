@@ -11,7 +11,7 @@ const currentPath = Astro.url.pathname
 
 <body class="flex min-h-screen flex-col bg-base-100 text-base-content">
   <header class="sticky top-0 z-10 bg-base-200">
-    <div class="container flex items-center justify-between gap-4">
+    <div class="container flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between">
       <h2 class="text-3xl font-medium tracking-wide">Rick and Morty</h2>
       <div class="flex items-center gap-2">
         <LanguageSelect currentPath={currentPath} client:load />

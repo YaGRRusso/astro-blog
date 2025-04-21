@@ -17,6 +17,13 @@
   }
 }
 
+@utility ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
 @theme {
   --color-input: color-mix(in oklab, var(--color-base-content) 20%, #0000);
   --color-muted: color-mix(in oklab, var(--color-base-content) 60%, #0000);
