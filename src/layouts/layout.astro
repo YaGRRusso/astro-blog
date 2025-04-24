@@ -1,7 +1,7 @@
 ---
-import Confetti from "@/components/Confetti.astro"
-import { LanguageSelect } from "@/components/LanguageSelect"
-import { ThemeSwitch } from "@/components/ThemeSwitch"
+import Confetti from "@/components/commons/confetti.astro"
+import { LanguageSelect } from "@/components/layout/language-select"
+import { ThemeSwitch } from "@/components/layout/theme-switch"
 import { getTranslation } from "@/utils/i18n"
 
 const { t } = getTranslation(Astro.currentLocale)

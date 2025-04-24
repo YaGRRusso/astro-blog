@@ -1,5 +1,6 @@
-import { CharacterCard } from "./CharacterCard"
-import { Pagination } from "./Pagination"
+import { CharacterCard } from "./character-card"
+
+import { Pagination } from "../commons/pagination"
 
 import { useQuery } from "@tanstack/react-query"
 import { useState, type HTMLAttributes } from "react"
