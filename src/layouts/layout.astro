@@ -1,5 +1,6 @@
 ---
 import Confetti from "@/components/commons/confetti.astro"
+import Link from "@/components/commons/link.astro"
 import { LanguageSelect } from "@/components/layout/language-select"
 import { ThemeSwitch } from "@/components/layout/theme-switch"
 import { getTranslation } from "@/utils/i18n"
@@ -12,7 +13,9 @@ const currentPath = Astro.url.pathname
 <body class="flex min-h-screen flex-col bg-base-100 text-base-content">
   <header class="sticky top-0 z-10 bg-base-200">
     <div class="container flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between">
-      <h2 class="text-3xl font-medium tracking-wide">Rick and Morty</h2>
+      <Link href="/">
+        <h2 class="text-3xl font-medium tracking-wide">Rick and Morty</h2>
+      </Link>
       <div class="flex items-center gap-2">
         <LanguageSelect currentPath={currentPath} client:load />
         <ThemeSwitch client:load />

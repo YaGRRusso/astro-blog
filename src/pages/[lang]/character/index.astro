@@ -1,6 +1,7 @@
 ---
 import { User } from "@phosphor-icons/react"
 
+import { CharacterInfo } from "@/components/characters/character-info"
 import Hero from "@/components/commons/hero.astro"
 import Layout from "@/layouts/layout.astro"
 import Root from "@/layouts/root.astro"
@@ -9,12 +10,6 @@ import { getTranslation } from "@/utils/i18n"
 export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "pt" } }]
 }
-
-const search = Astro.url.searchParams
-console.log(search.get("id"))
-
-// const res = await tc(getCharacter(Number(search.get("id"))))
-// const character = res?.data
 
 const { t } = getTranslation(Astro.currentLocale)
 ---
@@ -28,6 +23,6 @@ const { t } = getTranslation(Astro.currentLocale)
     <Hero title={t("pages.character.title")} description={t("pages.character.description")}>
       <User slot="icon" />
     </Hero>
-    <!-- {character && <CharacterCard {...character} />} -->
+    <CharacterInfo client:load />
   </Layout>
 </Root>

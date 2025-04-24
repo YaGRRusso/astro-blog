@@ -15,10 +15,11 @@ type Payload = Parameters<typeof getCharacters>[0]
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   initialData?: Response
+  initialPayload?: Payload
 }
 
-function CharactersListWithoutProvider({ initialData, className, ...props }: Props) {
-  const [payload, setPayload] = useState<Payload>()
+function CharactersListWithoutProvider({ initialData, initialPayload, className, ...props }: Props) {
+  const [payload, setPayload] = useState<Payload>(initialPayload)
 
   const characters = useQuery({
     initialData: payload === undefined ? initialData : undefined,
@@ -29,9 +30,9 @@ function CharactersListWithoutProvider({ initialData, className, ...props }: Pro
   return (
     <div className={cn("flex w-full flex-col gap-4", className)} {...props}>
       <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {characters.isLoading
-          ? [...Array(9)].map((index) => <div key={index} className="h-64 w-full skeleton"></div>)
-          : characters.data?.data.results?.map((character) => <CharacterCard key={character.id} {...character} />)}
+        {characters.isLoading && [...Array(9)].map((index) => <div key={index} className="h-64 w-full skeleton"></div>)}
+        {characters.data?.data &&
+          characters.data.data.results?.map((character) => <CharacterCard key={character.id} {...character} />)}
       </ul>
       <Pagination
         count={characters.data?.data.info?.count}
